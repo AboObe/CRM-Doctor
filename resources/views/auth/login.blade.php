@@ -4,9 +4,9 @@
  <!-- Start Head -->
  @include('layouts.head')
 	<!-- End Head -->
-  
+
   <body class="">
-    
+
     <main class="main-content mt-0 ps">
       <section>
         <div class="page-header min-vh-100">
@@ -21,14 +21,14 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                   <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
                     <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Premium <sub>CRM</sub></h4>
-                    
+
                   </div>
                 </div>
                 <div class="card-body">
                   <form role="form" class="text-start" method="POST" action="{{ route('login') }}">
                         @csrf
                     <div class="input-group input-group-outline my-3">
-                      <label class="form-label">{{ __('E-Mail') }}</label>
+                      <label class="form-label">{{ __('E-Mail') }} </label>
                       <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" onfocus="focused(this)" onfocusout="defocused(this)">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -89,6 +89,6 @@
     <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/material-dashboard.min.js?v=3.0.0"></script>
-  
-  
+
+
   </body></html>

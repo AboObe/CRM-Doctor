@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\WEB;
 
 use App\Http\Controllers\Controller;
-use App\Interfaces\BasicRepositoryInterface; 
+use App\Interfaces\BasicRepositoryInterface;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use DataTables;
+use Validator;
+
 
 class DoctorController extends Controller
 {
     private BasicRepositoryInterface $basicRepository;
     private $model;
 
-    public function __construct(BasicRepositoryInterface $basicRepository) 
+    public function __construct(BasicRepositoryInterface $basicRepository)
     {
         $this->middleware(['auth',"isAdmin"]);
         $this->basicRepository = $basicRepository;
@@ -23,9 +26,30 @@ class DoctorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-       return  $doctors= $this->basicRepository->getAll($this->model);
+         $doctors= $this->basicRepository->getAll($this->model);
+         if($request->ajax()){
+
+            return Datatables::of($doctors)
+
+                ->addIndexColumn()
+
+                ->addColumn('action', function($row){
+
+                    $btn = '<a href="'.route('doctor.edit',['doctor'=>$row->id]).'" data-toggle="tooltip"  data-original-title="Edit" class="edit btn btn-primary btn-sm edit"> <i class="fa fa-edit"></i>  </a>';
+
+
+                    return $btn;
+
+                })
+
+                ->rawColumns(['action'])
+
+                ->make(true);
+                return;
+        }
+
         return view('doctor/index',compact('doctors'));
     }
 
@@ -47,7 +71,7 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validateErrors = Validator::make($request->all(),[
             'name'   => 'required|max:250',
             'center'   => 'required|max:250',
             'phone'   => 'required',
@@ -57,6 +81,9 @@ class DoctorController extends Controller
             'status_doctor'   => 'required|in:inactive,active',
             'email'   => 'email',
         ]);
+        if ($validateErrors->fails()) {
+            return response()->json(['status' => 201, 'message' => $validateErrors->errors()->first()]);
+        } // end if fails .
         $doctorDetails = $request->only([
                 'name',
                 'center',
@@ -73,9 +100,10 @@ class DoctorController extends Controller
             ]);
 
         $doctor = $this->basicRepository->create($this->model,$doctorDetails);
-        
+        return response()->json([
+            "status"=>200,"message"=>"success"]);
         return redirect()->intended('doctor');
-    
+
     }
 
     /**
@@ -99,7 +127,7 @@ class DoctorController extends Controller
     public function edit($id)
     {
         $doctor = $this->basicRepository->getById($this->model,$id);
-        return view('doctor/edit',compact('doctor'));
+        return view('doctor/create',compact('doctor'));
     }
 
     /**
@@ -121,7 +149,7 @@ class DoctorController extends Controller
             'status_doctor'   => 'required|in:inactive,active',
             'email'   => 'email',
         ]);
-        
+
         $doctorDetails = $request->only([
             'name',
             'center',
@@ -138,7 +166,7 @@ class DoctorController extends Controller
         ]);
 
         $doctor = $this->basicRepository->update($this->model, $id, $doctorDetails);
-        
+
         return redirect()->intended('doctor');
     }
 
@@ -155,7 +183,7 @@ class DoctorController extends Controller
         ];
 
         $doctor = $this->basicRepository->update($this->model, $id, $doctorDetails);
-        
+
         return redirect()->intended('doctor');
     }
 }

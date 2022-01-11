@@ -52,7 +52,7 @@ class LoginController extends Controller
             'email.exists'          => 'Email not registered',
             'email.email'           => 'Please enter valid email ',
             'password.required' => 'Enter your password.',
-        ]; 
+        ];
 
         $validator = Validator::make($data, [
             'email'             =>'required|email|exists:users',
@@ -63,10 +63,11 @@ class LoginController extends Controller
     }
 
     public function login(Request $request)
-    {  
+    {
+
         $validator = $this->rules($request->all());
         if($validator->fails()){
-           return redirect()->back()->withErrors($validator)->withInput();   
+           return redirect()->back()->withErrors($validator)->withInput();
         }
         else{
            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
