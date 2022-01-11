@@ -81,7 +81,7 @@ class DoctorController extends Controller
             'status_doctor'   => 'required|in:inactive,active',
             'email'   => 'email',
             'website' =>  [
-                'required', 
+                'required',
                 Rule::unique('doctors')
                        ->where('phone', $this->phone)
                ]
@@ -154,7 +154,7 @@ class DoctorController extends Controller
             'status_doctor'   => 'required|in:inactive,active',
             'email'   => 'email',
             'website' =>  [
-                'required', 
+                'required',
                 Rule::unique('doctors')
                        ->ignore($this->doctor)
                        ->where('phone', $this->phone)
