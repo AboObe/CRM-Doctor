@@ -1,11 +1,13 @@
 @extends('doctor.base')
 @section('action-content')
 <div class="p-4 bg-light" >
-    <form  method="POST"  action="{{ route('doctor.store') }}" data-parsley-validate novalidate enctype="multipart/form-data">
-                {{ csrf_field() }}
+    <form  method="POST"  action="{{ route('doctor.update', $doctor->id) }}" data-parsley-validate novalidate enctype="multipart/form-data">
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        {{ csrf_field() }}
         <div class="input-group input-group-outline my-3">
         <label class="form-label">Doctor Name</label>
-        <input type="text" class="form-control" id="name" name="name">
+        <input type="text" class="form-control" id="name" name="name" value="{{$doctor->name}}">
         </div>
         <div class="input-group input-group-outline my-3">
         <label class="form-label">Center Name</label>
@@ -70,8 +72,8 @@
             </div>
         </div>
         <div class="form-group text-right m-b-0">
-                    <button class="btn btn-primary" type="submit" data-bs-placement="left">
-                        Create
+                    <button class="btn btn-primary" type="submit">
+                        Save
                     </button>
                     <a class="btn btn-secondary m-l-5" href ="{{route('doctor.index')}}">
                         Cancel
