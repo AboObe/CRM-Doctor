@@ -98,6 +98,7 @@ class DoctorController extends Controller
                 'city',
                 'region',
                 'country',
+                'postal_code'
             ]);
 
         $doctor = $this->basicRepository->create($this->model,$doctorDetails);
@@ -144,11 +145,16 @@ class DoctorController extends Controller
             'name'   => 'required|max:250',
             'center'   => 'required|max:250',
             'phone'   => 'required',
-            'website'   => 'required',
             'address'   => 'required',
             'status_contract'   => 'required|in:pending,signature',
             'status_doctor'   => 'required|in:inactive,active',
             'email'   => 'email',
+            'website' =>  [
+                'required', 
+                Rule::unique('doctors')
+                       ->ignore($this->doctor)
+                       ->where('phone', $this->phone)
+               ]
         ]);
 
         $doctorDetails = $request->only([
@@ -164,6 +170,7 @@ class DoctorController extends Controller
             'city',
             'region',
             'country',
+            'postal_code'
         ]);
 
         $doctor = $this->basicRepository->update($this->model, $id, $doctorDetails);

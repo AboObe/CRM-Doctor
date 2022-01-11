@@ -12,8 +12,9 @@
             </div>
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
+                <table id="tableData" class="table align-items-center mb-0  data-table">
 
-                <table id="tableData" class="table table-striped  data-table">
+                  <thead>
                     <thead>
                       <tr>
                          <th style="width:10%;">#</th>
