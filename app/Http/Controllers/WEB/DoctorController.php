@@ -8,7 +8,7 @@ use App\Models\Doctor;
 use Illuminate\Http\Request;
 use DataTables;
 use Validator;
-
+use Illuminate\Validation\Rule;
 
 class DoctorController extends Controller
 {
@@ -75,11 +75,15 @@ class DoctorController extends Controller
             'name'   => 'required|max:250',
             'center'   => 'required|max:250',
             'phone'   => 'required',
-            'website'   => 'required',
             'address'   => 'required',
             'status_contract'   => 'required|in:pending,signature',
             'status_doctor'   => 'required|in:inactive,active',
             'email'   => 'email',
+            'website' =>  [
+                'required', 
+                Rule::unique('doctors')
+                       ->where('phone', $this->phone)
+               ]
         ]);
         if ($validateErrors->fails()) {
             return response()->json(['status' => 201, 'message' => $validateErrors->errors()->first()]);
@@ -140,7 +144,7 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $validateErrors = Validator::make($request->all(),[
             'name'   => 'required|max:250',
             'center'   => 'required|max:250',
             'phone'   => 'required',
@@ -155,7 +159,9 @@ class DoctorController extends Controller
                        ->where('phone', $this->phone)
                ]
         ]);
-
+        if ($validateErrors->fails()) {
+            return response()->json(['status' => 201, 'message' => $validateErrors->errors()->first()]);
+        } // end if fails .
         $doctorDetails = $request->only([
             'name',
             'center',
