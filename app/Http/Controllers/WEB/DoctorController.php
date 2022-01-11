@@ -108,7 +108,7 @@ class DoctorController extends Controller
         $doctor = $this->basicRepository->create($this->model,$doctorDetails);
         return response()->json([
             "status"=>200,"message"=>"success"]);
-        return redirect()->intended('doctor');
+
 
     }
 
@@ -180,8 +180,9 @@ class DoctorController extends Controller
         ]);
 
         $doctor = $this->basicRepository->update($this->model, $id, $doctorDetails);
+        return response()->json([
+            "status"=>200,"message"=>"success"]);
 
-        return redirect()->intended('doctor');
     }
 
     /**

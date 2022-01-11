@@ -141,14 +141,15 @@
                     if(data.status==200) {
                       if(operation !== "update"){
                         $("#operation_id").val('');
-                        $("#operation").val('')
+                        $("#operation").val('');
+                        $("#post-form").trigger('reset');
                       }
                       else{
                         $("#operation_id").val(operation_id);
                         $("#operation").val("update")
                       }
 
-                        $("#post-form").trigger('reset');
+
                         showSuccesFunction(data.message);
 
                       }
