@@ -3,6 +3,8 @@
 <div class="p-4 bg-light" >
     <form  method="POST" id="post-form" name="create-doctor" action="{{ route('doctor.store') }}" data-parsley-validate novalidate enctype="multipart/form-data">
                 {{ csrf_field() }}
+                <input type="hidden" name="operation" id="operation" value="{{isset($doctor) ? 'update':''}}">
+                <input type="hidden" name="operation_id" id="operation_id" value="{{isset($doctor) ? $doctor->id:''}}">
         <div class="input-group input-group-outline my-3 {{ isset($doctor) ? 'focused is-focused':'' }}">
         <label class="form-label">Doctor Name</label>
         <input type="text" class="form-control" id="name" name="name" required value="{{$doctor->name ?? ''}}">
@@ -108,6 +110,7 @@
        var method = "POST";
 
         var operation = $("#operation").val();
+        var operation_id = $("#operation_id").val();
         if(operation == "update"){
           if(!$("#operation_id").val()){
             showErrorFunction("please Choose Item to edit");
@@ -140,6 +143,10 @@
                         $("#operation_id").val('');
                         $("#operation").val('')
                       }
+                      else{
+                        $("#operation_id").val(operation_id);
+                        $("#operation").val("update")
+                      }
 
                         $("#post-form").trigger('reset');
                         showSuccesFunction(data.message);
@@ -154,8 +161,8 @@
                 error: function (data) {
                   if(operation == "update"){
                       btn.html('Update');
-                      $("#operation_id").val('');
-                       $("#operation").val('')
+                      $("#operation_id").val(operation_id);
+                        $("#operation").val("update")
                   }else{
                     btn.html('Create');
                   }
