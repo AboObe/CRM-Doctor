@@ -39,6 +39,7 @@ class DoctorController extends Controller
 
                     $btn = '<a href="'.route('doctor.edit',['doctor'=>$row->id]).'" data-toggle="tooltip"  data-original-title="Edit" class="edit btn btn-primary btn-sm edit"> <i class="fa fa-edit"></i>  </a>';
 
+                    $btn .= ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm delete"> <i class="fa fa-trash"></i>    </a>';
 
                     return $btn;
 

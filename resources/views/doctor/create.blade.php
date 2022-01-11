@@ -1,7 +1,7 @@
 @extends('doctor.base')
 @section('action-content')
 <div class="p-4 bg-light" >
-    <form  method="POST" id="post-form"  action="{{ route('doctor.store') }}" data-parsley-validate novalidate enctype="multipart/form-data">
+    <form  method="POST" id="post-form" name="create-doctor" action="{{ route('doctor.store') }}" data-parsley-validate novalidate enctype="multipart/form-data">
                 {{ csrf_field() }}
         <div class="input-group input-group-outline my-3 {{ isset($doctor) ? 'focused is-focused':'' }}">
         <label class="form-label">Doctor Name</label>
@@ -128,12 +128,19 @@
                 dataType: 'json',
                 timeout:10000,
                 success: function (data) {
-                      btn.html('Create');
+                  if(operation == "update"){
+                      btn.html('Update');
+                  }else{
+                    btn.html('Create');
+                  }
                        btn.attr('disabled',false);
 
                     if(data.status==200) {
+                      if(operation !== "update"){
                         $("#operation_id").val('');
-                       $("#operation").val('')
+                        $("#operation").val('')
+                      }
+
                         $("#post-form").trigger('reset');
                         showSuccesFunction(data.message);
 
@@ -145,10 +152,15 @@
                 },
 
                 error: function (data) {
-                      btn.html('Create');
-                       btn.attr('disabled',false);
-                        $("#operation_id").val('');
+                  if(operation == "update"){
+                      btn.html('Update');
+                      $("#operation_id").val('');
                        $("#operation").val('')
+                  }else{
+                    btn.html('Create');
+                  }
+                       btn.attr('disabled',false);
+
                     showErrorFunction();
                 }
               });
@@ -157,6 +169,46 @@
 
 
   });
+
+  $(function() {
+  // Initialize form validation on the registration form.
+  // It has the name attribute "registration"
+  $("form[name='create-doctor']").validate({
+    // Specify validation rules
+    rules: {
+      // The key name on the left side is the name attribute
+      // of an input field. Validation rules are defined
+      // on the right side
+      name: "required",
+      center: "required",
+      email: {
+        required: true,
+        // Specify that email should be validated
+        // by the built-in "email" rule
+        email: true
+      },
+      password: {
+        required: true,
+        minlength: 5
+      }
+    },
+    // Specify validation error messages
+    messages: {
+      firstname: "Please enter your firstname",
+      lastname: "Please enter your lastname",
+      password: {
+        required: "Please provide a password",
+        minlength: "Your password must be at least 5 characters long"
+      },
+      email: "Please enter a valid email address"
+    },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
+});
 </script>
 @endpush
 
