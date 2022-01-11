@@ -156,8 +156,8 @@ class DoctorController extends Controller
             'website' =>  [
                 'required',
                 Rule::unique('doctors')
-                       ->ignore($this->doctor)
-                       ->where('phone', $this->phone)
+                       ->ignore($id)
+                       ->where('phone', $request['phone'])
                ]
         ]);
         if ($validateErrors->fails()) {
