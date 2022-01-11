@@ -7,7 +7,7 @@ use Validator;
 use DB;
 use App\Interfaces\BasicRepositoryInterface; 
 use App\Models\Doctor;
-
+use Illuminate\Validation\Rule;
 
 
 class DoctorController extends BaseController
@@ -53,11 +53,15 @@ class DoctorController extends BaseController
             'name'   => 'required|max:250',
             'center'   => 'required|max:250',
             'phone'   => 'required',
-            'website'   => 'required',
             'address'   => 'required',
             'status_contract'   => 'required|in:pending,signature',
             'status_doctor'   => 'required|in:inactive,active',
             'email'   => 'email',
+            'website' =>  [
+                'required', 
+                Rule::unique('doctors')
+                       ->where('phone', $this->phone)
+               ]
         ]);
 
         if($validator->fails()){
@@ -113,7 +117,43 @@ class DoctorController extends BaseController
     */
     public function update(Request $request, $id)
     {
-       return "no action";
+        $validateErrors = Validator::make($request->all(),[
+            'name'   => 'required|max:250',
+            'center'   => 'required|max:250',
+            'phone'   => 'required',
+            'address'   => 'required',
+            'status_contract'   => 'required|in:pending,signature',
+            'status_doctor'   => 'required|in:inactive,active',
+            'email'   => 'email',
+            'website' =>  [
+                'required', 
+                Rule::unique('doctors')
+                       ->ignore($this->doctor)
+                       ->where('phone', $this->phone)
+               ]
+        ]);
+        if ($validateErrors->fails()) {
+            return response()->json(['status' => 201, 'message' => $validateErrors->errors()->first()]);
+        } // end if fails .
+        $doctorDetails = $request->only([
+            'name',
+            'center',
+            'mobile_number',
+            'phone',
+            'website',
+            'address',
+            'status_contract',
+            'status_doctor',
+            'email',
+            'city',
+            'region',
+            'country',
+            'postal_code'
+        ]);
+
+        $doctor = $this->basicRepository->update($this->model, $id, $doctorDetails);
+
+        return $this->sendResponse($doctor , 'Doctor updated successfully.'); 
     }
    
     /**
