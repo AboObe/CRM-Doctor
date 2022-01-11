@@ -12,193 +12,29 @@
             </div>
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
-                      <th class="text-secondary opacity-7"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@premiumaligners.net</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">Organization</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                            <p class="text-xs text-secondary mb-0">alexa@premiumaligners.net</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user3">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                            <p class="text-xs text-secondary mb-0">laurent@premiumaligners.net</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Executive</p>
-                        <p class="text-xs text-secondary mb-0">Projects</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user4">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Michael Levi</h6>
-                            <p class="text-xs text-secondary mb-0">michael@premiumaligners.net</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user5">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Richard Gran</h6>
-                            <p class="text-xs text-secondary mb-0">richard@premiumaligners.net</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">Executive</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user6">
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                            <p class="text-xs text-secondary mb-0">miriam@premiumaligners.net</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+
+                <table id="tableData" class="table table-striped  data-table">
+                    <thead>
+                      <tr>
+                         <th style="width:10%;">#</th>
+                         <th style="width: 35%;">Name</th>
+                         <th style="width: 35%;">Phone</th>
+
+                         <th style="width: 20%;">Action</th>
+
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                  </table>
+
+
               </div>
             </div>
           </div>
         </div>
       </div>
-     
+
       <!-- Start Head -->
         @include('layouts.footer')
 	    <!-- End Head -->
@@ -209,3 +45,169 @@
     </div>
 
 @endsection
+
+@push('pageJs')
+
+<script>
+    $(function(){
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+       var table = $('.data-table').DataTable({
+
+                  destroy: true,
+                  processing: true,
+
+                  serverSide: true,
+                  stateSave: true,
+
+              ajax:"{{route('doctor.index')}}",
+
+              columns: [
+
+                  {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+
+                  {data: 'name', name: 'name'},
+                  {data: 'phone', name: 'phone'},
+
+
+                  {data: 'action', name: 'action', orderable: false, searchable: false},
+
+                ]
+
+                });
+
+
+        $('body').on('click',"#addBtnAction" , function(e){
+        e.preventDefault();
+
+        var btn = $(this);
+
+         btn.html('<i class="fa fa-spinner"></i> ');
+         btn.attr('disabled',true);
+         var url = "{{ route('doctor.store') }}";
+         var method = "POST";
+
+          var operation = $("#operation").val();
+          if(operation == "update"){
+            if(!$("#operation_id").val()){
+              showErrorFunction("please Choose Item to edit");
+              return;
+            }
+              url ="{{ route('doctor.index') }}"+ '/' + $("#operation_id").val() ;
+              method = "PUT";
+          }
+
+              $.ajax({
+
+                  data: $("#post-form").serialize() ,
+
+                  url:url ,
+
+                  type: method,
+
+                  dataType: 'json',
+                  timeout:10000,
+                  success: function (data) {
+                      if(operation == "update"){
+
+                          btn.html('Update');
+                          }else{
+
+                          btn.html('Add');
+                          }
+                         btn.attr('disabled',false);
+                      if(data.status==200) {
+                         $("#operation_id").val('');
+                         $("#operation").val('')
+                        table.draw(false);
+                          $("#post-form").trigger('reset');
+                          showSuccesFunction(data.message);
+
+                        }
+                      else{
+
+                          showErrorFunction(data.message);
+                      }
+                  },
+
+                  error: function (data) {
+                        btn.html('Add');
+                         btn.attr('disabled',false);
+                          $("#operation_id").val('');
+                         $("#operation").val('')
+                      showErrorFunction();
+                  }
+                });
+              }); // end add new record
+
+
+              $('body').on('click', '.edit', function () {
+
+                  var product_id = $(this).data('id');
+                  var name = $(this).data('name');
+                  var email = $(this).data('email');
+                  var nationality = $(this).data('nationality');
+                  var phone = $(this).data('phone');
+                  $("#name").val(name);
+                  $("#email").val(email);
+                  $("#phone").val(phone);
+                  $("#nationality").val(nationality);
+                  $("#addBtnAction").html("Update");
+                  $("#operation").val("update");
+                  $("#operation_id").val(product_id);
+
+
+
+              }) ;// end edit function;
+
+          $('body').on('click', '.delete', function () {
+            var btn = $(this);
+
+               btn.html('<i class="fa fa-spinner"></i>  ');
+               btn.attr('disabled',true);
+                  var _id = $(this).data("id");
+                var route =  "{{ route('doctor.index') }}"+ '/' + _id;
+                  sweetConfirm( function (confirmed) {
+                  if (confirmed) {
+
+                      $.ajax({
+
+              type: "DELETE",
+
+              url:route,
+              data:{
+                  '_token':'{{csrf_token()}}'
+              },
+              success: function (data) {
+               showSuccesFunction(data.message);
+                  btn.html('<i class="fa fa-trash"></i>');
+                  btn.attr('disabled',false);
+                  table.draw(false);
+
+              },
+
+              error: function (data) {
+                  btn.html('<i class="fa fa-trash"></i>');
+                  btn.attr('disabled',false);
+               }
+
+              }); // ajax
+            } // if
+            else{
+
+                  btn.html('<i class="fa fa-trash"></i>');
+                  btn.attr('disabled',false);
+            }
+
+
+          });
+
+          }); // end delete row
+
+    });
+  </script>
+  @endpush
+
