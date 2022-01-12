@@ -93,7 +93,7 @@ class AppointmentController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $id)
     {
        return "no action";
     }
@@ -106,43 +106,34 @@ class AppointmentController extends BaseController
     */
     public function update(Request $request, $id)
     {
-        $validateErrors = Validator::make($request->all(),[
-            'name'   => 'required|max:250',
-            'center'   => 'required|max:250',
-            'phone'   => 'required',
-            'address'   => 'required',
-            'status_contract'   => 'required|in:pending,signature',
-            'status_doctor'   => 'required|in:inactive,active',
-            'email'   => 'email',
-            'website' =>  [
-                'required',
-                Rule::unique('doctors')
-                       ->ignore($id)
-                       ->where('phone', $request['phone'])
-               ]
-        ]);
-        if ($validateErrors->fails()) {
-            return response()->json(['status' => 201, 'message' => $validateErrors->errors()->first()]);
-        } // end if fails .
-        $doctorDetails = $request->only([
-            'name',
-            'center',
-            'mobile_number',
-            'phone',
-            'website',
-            'address',
-            'status_contract',
-            'status_doctor',
-            'email',
-            'city',
-            'region',
-            'country',
-            'postal_code'
+        $representative_id = Auth::user()->id;
+
+        $input = $request->all();
+        
+        $validator = Validator::make($input, [
+            'doctor_id'   => 'required',
+            'expected_date'   => 'required|date',
+            'actual_date' => 'date'
         ]);
 
-        $doctor = $this->basicRepository->update($this->model, $id, $doctorDetails);
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
 
-        return $this->sendResponse($doctor , 'Doctor updated successfully.');
+        $appointmentDetails = $request->only([
+                'doctor_id',
+                'expected_date',
+                'location',
+                'notes',
+                'actual_date',
+                'status',
+            ]);
+
+        $appointmentDetails['representative_id'] = $representative_id;
+      
+        $appointment = $this->basicRepository->update($this->model, $id, $appointmentDetails);
+
+        return $this->sendResponse($appointment , 'Appointment updated successfully.');
     }
 
     /**
@@ -156,5 +147,19 @@ class AppointmentController extends BaseController
 
     }
 
+    /**
+     * get future appointment 
+     */
+    public function appointmentFuture()
+    {
+        $representative_id = Auth::user();
+        //$appointments = Appointment::where('representative_id',)
+    }
+     /**
+      * get old appointment
+      */
+    public function appointmentsPast()
+    {
 
+    }
 }

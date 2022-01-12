@@ -32,6 +32,7 @@ class BasicRepository implements BasicRepositoryInterface
 
     public function update($model, $id, array $newDetails) 
     {
-        return $model::whereId($id)->update($newDetails);
+        $model::whereId($id)->update($newDetails);
+        return $model::whereId($id)->first();
     }
 }
