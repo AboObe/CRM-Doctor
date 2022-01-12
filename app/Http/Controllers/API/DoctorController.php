@@ -5,7 +5,7 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use Illuminate\Http\Request;
 use Validator;
 use DB;
-use App\Interfaces\BasicRepositoryInterface; 
+use App\Interfaces\BasicRepositoryInterface;
 use App\Models\Doctor;
 use Illuminate\Validation\Rule;
 
@@ -35,7 +35,7 @@ class DoctorController extends BaseController
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function create()
     {
         return "no action";
@@ -58,14 +58,14 @@ class DoctorController extends BaseController
             'status_doctor'   => 'required|in:inactive,active',
             'email'   => 'email',
             'website' =>  [
-                'required', 
+                'required',
                 Rule::unique('doctors')
-                       ->where('phone', $this->phone)
+                       ->where('phone', $request['phone'])
                ]
         ]);
 
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         $doctorDetails = $request->only([
@@ -85,9 +85,9 @@ class DoctorController extends BaseController
 
         $doctor = $this->basicRepository->create($this->model,$doctorDetails);
 
-        return $this->sendResponse($doctor , 'Doctor created successfully.');        
-    } 
-   
+        return $this->sendResponse($doctor , 'Doctor created successfully.');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -126,7 +126,7 @@ class DoctorController extends BaseController
             'status_doctor'   => 'required|in:inactive,active',
             'email'   => 'email',
             'website' =>  [
-                'required', 
+                'required',
                 Rule::unique('doctors')
                        ->ignore($id)
                        ->where('phone', $request['phone'])
@@ -153,9 +153,9 @@ class DoctorController extends BaseController
 
         $doctor = $this->basicRepository->update($this->model, $id, $doctorDetails);
 
-        return $this->sendResponse($doctor , 'Doctor updated successfully.'); 
+        return $this->sendResponse($doctor , 'Doctor updated successfully.');
     }
-   
+
     /**
      * Remove the specified resource from storage.
      *
@@ -164,8 +164,8 @@ class DoctorController extends BaseController
     */
     public function destroy($id)
     {
-       
+
     }
 
-   
+
 }
