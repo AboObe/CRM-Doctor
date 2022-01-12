@@ -6,12 +6,11 @@ use Illuminate\Http\Request;
 use Validator;
 use DB;
 use App\Interfaces\BasicRepositoryInterface;
-use App\Models\Doctor;
-use Illuminate\Validation\Rule;
+use App\Models\Appointment;
 use Illuminate\Support\Facades\Auth;
 
 
-class DoctorController extends BaseController
+class AppointmentController extends BaseController
 {
     private BasicRepositoryInterface $basicRepository;
     private $model;
@@ -20,7 +19,7 @@ class DoctorController extends BaseController
     {
         $this->middleware('auth:sanctum');
         $this->basicRepository = $basicRepository;
-        $this->model = new Doctor;
+        $this->model = new Appointment;
     }
      /**
      * Display a listing of the resource.
@@ -29,13 +28,7 @@ class DoctorController extends BaseController
      */
     public function index()
     {
-        $representative_id = Auth::user()->id;
-
-        $doctors = Doctor::where('assign_to',$representative_id)
-                            ->where('status_doctor','active')
-                            ->get();
-
-        return $this->sendResponse($doctors , 'Return Doctors successfully.'); 
+        return "no action";
     }
 
     /**
@@ -45,7 +38,7 @@ class DoctorController extends BaseController
      */
     public function create()
     {
-        return "no action3";
+        return "no action";
     }
     /**
      * Store a newly created resource in storage.
@@ -55,44 +48,33 @@ class DoctorController extends BaseController
     */
     public function store(Request $request)
     {
+        $representative_id = Auth::user()->id;
+
         $input = $request->all();
         $validator = Validator::make($input, [
-            'name'   => 'required|max:250',
-            'center'   => 'required|max:250',
-            'phone'   => 'required',
-            'address'   => 'required',
-            'status_contract'   => 'required|in:pending,signature',
-            'status_doctor'   => 'required|in:inactive,active',
-            'email'   => 'email',
-            'website' =>  [
-                'required',
-                Rule::unique('doctors')
-                       ->where('phone', $request['phone'])
-               ]
+            'doctor_id'   => 'required',
+            'expected_date'   => 'required|date',
+            'actual_date' => 'date'
         ]);
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $doctorDetails = $request->only([
-                'name',
-                'center',
-                'mobile_number',
-                'phone',
-                'website',
-                'address',
-                'status_contract',
-                'status_doctor',
-                'email',
-                'city',
-                'region',
-                'country',
+        $appointmentDetails = $request->only([
+                'doctor_id',
+                'expected_date',
+                'location',
+                'notes',
+                'actual_date',
+                'status',
             ]);
-        $doctorDetails['assign_to'] = Auth::user()->id;
-        $doctor = $this->basicRepository->create($this->model,$doctorDetails);
 
-        return $this->sendResponse($doctor , 'Doctor created successfully.');
+        $appointmentDetails['representative_id'] = $representative_id;
+
+        $appointment = $this->basicRepository->create($this->model,$appointmentDetails);
+
+        return $this->sendResponse($appointment , 'Appointment created successfully.');
     }
 
     /**
@@ -103,7 +85,7 @@ class DoctorController extends BaseController
     */
     public function show($id)
     {
-		return "no action2";
+		return "no action";
     }
     /**
      * Show the form for editing the specified resource.
@@ -113,7 +95,7 @@ class DoctorController extends BaseController
      */
     public function edit($id)
     {
-       return "no action1";
+       return "no action";
     }
     /**
      * Update the specified resource in storage.
@@ -173,24 +155,6 @@ class DoctorController extends BaseController
     {
 
     }
-
-    /**
-     * Search the doctors by phone or website or doctor name or center name and return doctors name and center name 
-    */
-    public function search(Request $request)
-    {
-        $representative_id = Auth::user()->id;
-        $doctors = Doctor::Where('doctors.phone',$request->name)
-                        ->orWhere('doctors.name','like','%'.$request->name.'%')
-                        ->orWhere('doctors.website','like','%'.$request->name.'%')
-                        ->orWhere('doctors.center','like','%'.$request->name.'%')
-					    ->select('name','center')
-                        ->take(10)
-                        ->get();
-
-        return $this->sendResponse($doctors , 'Doctors  retrieved successfully.'); 
-    }
-
 
 
 }

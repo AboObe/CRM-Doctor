@@ -29,6 +29,8 @@ class CreateDoctorsTable extends Migration
             $table->enum('status_doctor',['inactive','active']);
             $table->string('postal_code', 25)->nullable();
             $table->unique(['phone', 'website','region']);
+            $table->unsignedBigInteger('assign_to')->nullable();
+            $table->foreign('assign_to')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -48,10 +48,26 @@ class User extends Authenticatable
 
 
     /**
-     * Get the zones for the blog post.
+     * Get the zones this representative works at them.
      */
     public function zones()
     {
         return $this->hasMany(Zone::class);
+    }
+
+    /**
+     * Get the doctors this representative works with them.
+     */
+    public function doctors()
+    {
+        return $this->hasMany(Zone::class);
+    }
+
+    /**
+     * Get the appointments for the representative.
+     */
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
     }
 }

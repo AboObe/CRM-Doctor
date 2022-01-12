@@ -21,8 +21,8 @@ class CreateAppointmentsTable extends Migration
             $table->foreign('doctor_id')->references('id')->on('doctors')->cascadeOnDelete();
             $table->text('location')->nullable();
             $table->text('notes')->nullable();
-            $table->date('actual_date')->nullable();
-            $table->date('expected_date');
+            $table->datetime('actual_date')->nullable();
+            $table->datetime('expected_date');
             $table->enum('status',['pending','done','deleted'])->default('pending');
             $table->timestamps();
         });

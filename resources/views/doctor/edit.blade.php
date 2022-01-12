@@ -54,9 +54,9 @@
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-3">
                     <label for="status_doctor" class="ms-0">Doctor Status</label>
-                    <select class="form-control" id="status_doctor" name="status_doctor">
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
+                    <select class="form-control select2" id="status_doctor" name="status_doctor">
+                    <option value="active" {{$doctor->status_doctor =='active' ? 'selected' : ''}}>Active</option>
+                    <option value="inactive" {{$doctor->status_doctor =='inactive' ? 'selected' : ''}}>Inactive</option>
                     </select>
                 </div>
             </div>
@@ -64,9 +64,9 @@
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-2">
                     <label for="status_contract" class="ms-0">Contract Status</label>
-                    <select class="form-control" id="status_contract" name="status_contract">
-                    <option value="pending">Pending</option>
-                    <option value="signature">Signature</option>
+                    <select class="form-control select2" id="status_contract" name="status_contract">
+                    <option value="pending" {{$doctor->status_contract =="pending" ? 'selected' : ''}}>Pending</option>
+                    <option value="signature" {{$doctor->status_contract =="signature" ? 'selected' : ''}}>Signature</option>
                     </select>
                 </div>
             </div>

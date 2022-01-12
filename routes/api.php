@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\DoctorController;
+use App\Http\Controllers\API\AppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resources([
         'doctor' => DoctorController::class,
+        'appointment' => AppointmentController::class
     ]);
+    
+    Route::post('doctor/search', [DoctorController::class, 'search']);
 });
+
+
 
