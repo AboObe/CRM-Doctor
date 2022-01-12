@@ -37,6 +37,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     
     Route::post('doctor/search', [DoctorController::class, 'search']);
     Route::post('user/profile', [UserController::class, 'profile']);
+
+    Route::post('appointments/future', [AppointmentController::class, 'appointmentsFuture']);
+    Route::post('appointments/past', [AppointmentController::class, 'appointmentsPast']);
 });
 
 
