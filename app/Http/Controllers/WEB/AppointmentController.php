@@ -3,11 +3,26 @@
 namespace App\Http\Controllers\WEB;
 
 use App\Http\Controllers\Controller;
-use App\Models\appointment;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use App\Interfaces\BasicRepositoryInterface;
+use DataTables;
+use Validator;
+
+
 
 class AppointmentController extends Controller
 {
+
+    private BasicRepositoryInterface $basicRepository;
+    private $model;
+
+    public function __construct(BasicRepositoryInterface $basicRepository)
+    {
+        $this->middleware(['auth',"isAdmin"]);
+        $this->basicRepository = $basicRepository;
+        $this->model = new Appointment;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +30,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        return 77;
+        
     }
 
     /**
