@@ -24,7 +24,8 @@ class User extends Authenticatable
         'work_type',
         'mobile_number',
         'profile_photo',
-        'zone'
+        'admin',
+        'status'
     ];
 
     /**

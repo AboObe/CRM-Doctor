@@ -10,9 +10,8 @@ use DataTables;
 use Validator;
 use App\Http\Traits\ImageUploadTrait;
 
-class UserController extends Controller
+class ZoneController extends Controller
 {
-    use ImageUploadTrait;
     private BasicRepositoryInterface $basicRepository;
     private $model;
 
@@ -32,27 +31,27 @@ class UserController extends Controller
         $users= $this->basicRepository->getAll($this->model);
         if($request->ajax()){
 
-           return Datatables::of($users)
+            return Datatables::of($users)
 
-               ->addIndexColumn()
+                ->addIndexColumn()
 
-               ->addColumn('action', function($row){
+                ->addColumn('action', function($row){
 
-                   $btn = '<a href="'.route('user.edit',['user'=>$row->id]).'" data-toggle="tooltip"  data-original-title="Edit" class="edit btn btn-primary btn-sm edit"> <i class="fa fa-edit"></i>  </a>';
+                    $btn = '<a href="'.route('user.edit',['user'=>$row->id]).'" data-toggle="tooltip"  data-original-title="Edit" class="edit btn btn-primary btn-sm edit"> <i class="fa fa-edit"></i>  </a>';
 
-                   $btn .= ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm delete"> <i class="fa fa-trash"></i>    </a>';
+                    $btn .= ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm delete"> <i class="fa fa-trash"></i>    </a>';
 
-                   return $btn;
+                    return $btn;
 
-               })
+                })
 
-               ->rawColumns(['action'])
+                ->rawColumns(['action'])
 
-               ->make(true);
-               return;
-       }
+                ->make(true);
+                return;
+        }
 
-       return view('user/index',compact('users'));
+        return view('user/index',compact('users'));
     }
 
     /**
@@ -192,3 +191,4 @@ class UserController extends Controller
         return "Representative";
     }
 }
+    

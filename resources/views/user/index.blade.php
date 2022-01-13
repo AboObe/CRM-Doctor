@@ -1,4 +1,4 @@
-@extends('doctor.base')
+@extends('user.base')
 @section('action-content')
     <!-- End Navbar -->
     <div class="container-fluid py-4">
@@ -7,7 +7,7 @@
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Authors table</h6>
+                <h6 class="text-white text-capitalize ps-3">Users table</h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -19,7 +19,7 @@
                       <tr>
                          <th style="width:10%;">#</th>
                          <th style="width: 35%;">Name</th>
-                         <th style="width: 35%;">Phone</th>
+                         <th style="width: 35%;">Role</th>
 
                          <th style="width: 20%;">Action</th>
 
@@ -64,14 +64,14 @@
                   serverSide: true,
                   stateSave: true,
 
-              ajax:"{{route('doctor.index')}}",
+              ajax:"{{route('user.index')}}",
 
               columns: [
 
                   {data: 'DT_RowIndex', name: 'DT_RowIndex'},
 
                   {data: 'name', name: 'name'},
-                  {data: 'phone', name: 'phone'},
+                  {data: 'admin', name: 'admin'},
 
 
                   {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -88,7 +88,7 @@
 
          btn.html('<i class="fa fa-spinner"></i> ');
          btn.attr('disabled',true);
-         var url = "{{ route('doctor.store') }}";
+         var url = "{{ route('user.store') }}";
          var method = "POST";
 
           var operation = $("#operation").val();
@@ -97,7 +97,7 @@
               showErrorFunction("please Choose Item to edit");
               return;
             }
-              url ="{{ route('doctor.index') }}"+ '/' + $("#operation_id").val() ;
+              url ="{{ route('user.index') }}"+ '/' + $("#operation_id").val() ;
               method = "PUT";
           }
 
@@ -170,7 +170,7 @@
                btn.html('<i class="fa fa-spinner"></i>  ');
                btn.attr('disabled',true);
                   var _id = $(this).data("id");
-                var route =  "{{ route('doctor.index') }}"+ '/' + _id;
+                var route =  "{{ route('user.index') }}"+ '/' + _id;
                   sweetConfirm( function (confirmed) {
                   if (confirmed) {
 
