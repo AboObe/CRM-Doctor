@@ -6,6 +6,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\DoctorController;
 use App\Http\Controllers\API\AppointmentController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +39,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('doctor/search', [DoctorController::class, 'search']);
     Route::post('user/profile', [UserController::class, 'profile']);
 
-    Route::post('appointments/future', [AppointmentController::class, 'appointmentsFuture']);
-    Route::post('appointments/past', [AppointmentController::class, 'appointmentsPast']);
+    Route::post('appointments/future', [ReportController::class, 'appointmentsFuture']);
+    Route::post('appointments/past', [ReportController::class, 'appointmentsPast']);
 });
 
 

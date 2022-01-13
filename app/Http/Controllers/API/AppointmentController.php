@@ -4,12 +4,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\API\BaseController as BaseController;
 use Illuminate\Http\Request;
 use Validator;
-use DB;
 use App\Interfaces\BasicRepositoryInterface;
 use App\Models\Appointment;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-
 
 class AppointmentController extends BaseController
 {
@@ -148,28 +145,5 @@ class AppointmentController extends BaseController
 
     }
 
-    /**
-     * get future appointment 
-     */
-    public function appointmentsFuture()
-    {
-        $representative_id = Auth::user()->id;
-        $current_time = Carbon::now()->format('Y-m-d h:m:s');
-        $appointments = Appointment::where('representative_id',$representative_id)
-                                    ->where('expected_date','>',$current_time)->get();
-
-        return $this->sendResponse($appointments , 'Appointments Future returned successfully.');
-    }
-     /**
-      * get old appointment
-      */
-    public function appointmentsPast()
-    {
-        $representative_id = Auth::user()->id;
-       
-        $appointments = Appointment::where('representative_id',$representative_id)
-                                    ->where('expected_date','<',Carbon::now()->toDateTimeString())->get();
-        return $this->sendResponse($appointments , 'Appointments Past returned successfully.');
-
-    }
+   
 }
