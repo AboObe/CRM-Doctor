@@ -41,9 +41,9 @@ class ReportController extends BaseController
     public function appointmentsPast()
     {
         $representative_id = Auth::user()->id;
-       
+        $current_time = Carbon::now()->format('Y-m-d h:m:s');
         $appointments = Appointment::where('representative_id',$representative_id)
-                                    ->where('expected_date','<',Carbon::now()->toDateTimeString())->get();
+                                    ->where('expected_date','<',$current_time)->get();
         $appointmentsCollection =  collect();
         foreach($appointments as $appointment)
         {
