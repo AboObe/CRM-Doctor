@@ -9,6 +9,8 @@ use App\Interfaces\BasicRepositoryInterface;
 use DataTables;
 use Validator;
 use App\Http\Traits\ImageUploadTrait;
+use Hash;
+
 
 class UserController extends Controller
 {
@@ -44,9 +46,15 @@ class UserController extends Controller
 
                    return $btn;
 
+               })->addColumn('admin', function($row){
+                   if($row->admin ==1)
+                   return "Admin";
+                   else
+                   return "Agent";
+
                })
 
-               ->rawColumns(['action'])
+               ->rawColumns(['action','admin'])
 
                ->make(true);
                return;
@@ -73,7 +81,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+
         $validateErrors = Validator::make($request->all(), [
             'name'   => 'required|max:250',
             'email'   => 'required|email|unique:users',
@@ -81,12 +89,12 @@ class UserController extends Controller
             'work_type' => 'required|in:freelancer,contract',
             'admin' => 'required|in:0,1',
             'status' => 'required|in:active,inactive',
-            'photo'  => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'profile_photo'  => 'required||mimes:jpeg,png,jpg,gif|max:2048'
         ]);
         if ($validateErrors->fails()) {
             return response()->json(['status' => 201, 'message' => $validateErrors->errors()->first()]);
         } // end if fails .
-        
+
         $userDetails = $request->only([
             'name',
             'email',
@@ -95,13 +103,13 @@ class UserController extends Controller
             'status'
         ]);
 
-        if($request->hasFile('photo'))
-            $userDetails['photo'] = $this->imageUpload($request['photo'],"user");
+        if($request->hasFile('profile_photo'))
+            $userDetails['photo'] = $this->imageUpload($request['profile_photo'],"user");
+        $userDetails["password"] = Hash::make($request->password);
 
         $user = $this->basicRepository->create($this->model,$userDetails);
-        
-        return response()->json([
-            "status"=>200,"message"=>"success"]);
+
+        return redirect()->back();
     }
 
     /**
@@ -143,7 +151,7 @@ class UserController extends Controller
             'birthday'   => 'required|date|date_format:Y-m-d',
             'photo'  => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-        
+
         if ($validateErrors->fails()) {
             return response()->json(['status' => 201, 'message' => $validateErrors->errors()->first()]);
         } // end if fails .
@@ -161,7 +169,7 @@ class UserController extends Controller
         $patient = $this->basicRepository->getById($this->patient,$id);
 
         $patient = $this->basicRepository->update($this->patient, $id, $patientDetails);
-        
+
         return response()->json(["status"=>200,"message"=>"success"]);
     }
 

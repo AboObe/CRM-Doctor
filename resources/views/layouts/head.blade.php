@@ -6,6 +6,8 @@
   <title>
     PREMIUM CRM
   </title>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
@@ -19,5 +21,7 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css"  />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.4/sweetalert2.min.css"  />
+  <link rel="stylesheet" href="{{asset('dashboard/plugins/dropzone/min/dropzone.min.css')}}">
+
   <link id="pagestyle" href="{{asset('assets/css/material-dashboard.css')}}?v=3.0.0" rel="stylesheet" />
 </head>
