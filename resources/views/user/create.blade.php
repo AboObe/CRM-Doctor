@@ -1,7 +1,7 @@
 @extends('user.base')
 @section('action-content')
 <div class="p-4 bg-light" >
-    <form  method="POST" id="post-form" name="create-user1" action="{{ route('user.store') }}"   enctype="multipart/form-data">
+    <form  method="POST" id="post-form" name="create-user1e" action="{{ route('user.store') }}"   enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <input type="hidden" name="operation" id="operation" value="{{isset($user) ? 'update':''}}">
                 <input type="hidden" name="operation_id" id="operation_id" value="{{isset($user) ? $user->id:''}}">
@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <br>
-                <button class="btn btn-success" id="addZone">Add Zone </button>
+                <a  class="btn btn-success" id="addZoneBtn" onclick="addZone()">Add Zone </a>
 
             </div>
             <div class="col-md-6">
@@ -107,6 +107,41 @@
                 </div>
     </form>
 </div>
+<script>
+    function addZone(){
+
+var name = $("#zone-name").val();
+        var region = $("#zone-region").val();
+        if(name.length < 2){
+            alert("Please Enter Name");
+            return;
+        }
+        if(region.length < 2){
+            alert("enter region please");
+            return;
+        }
+        var html =
+        "<tr>" +
+        "<td></td>"+
+        "<td> <input type='text' name='z_name[]' value='"+name+"'>  </td>" +
+        "<td> <input type='text' name='z_region[]' value='"+region+"'>  </td>"+
+        "<td> <a class='removeInput' onclick='removeZone(this)' > <i class='fa fa-trash'></i>  </a> </td>"+
+        "</tr>" ;
+
+
+        $("#zoneListBody").append(html);
+}
+function removeZone(ele){
+    var item = ele;
+    $(ele).parent().parent().remove();
+    // $(this).parent().remove();
+    // $item.parent().remove();
+
+}
+
+
+
+</script>
 @endsection
 @push('pageJs')
 <script>
@@ -114,8 +149,19 @@
 
 
 
+$(function(){
+$('body').on('click',".removeInput" , function(e){
+    e.preventDefault();
+    alert("will remove");
+    $(this).parent().remove();
+
+});
+});
 
   $(function(){
+
+
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -124,10 +170,13 @@
 
 
         $('body').on('click',"#addBtnAction" , function(e){
-    $("#addBtnAction").html('<i class="fa fa-spinner"></i> ');
-    $("#addBtnAction").attr('disabled',true);
-});
-        $('body').on('click',"#addZone" , function(e){
+
+                $("#addBtnAction").html('<i class="fa fa-spinner"></i> ');
+                $("#addBtnAction").attr('disabled',true);
+            });
+        $('body').on('click',"#addZoneBtn" , function(e){
+            e.preventDefault();
+            alert("clicled");
             var name = $("#zone-name").val();
             var region = $("#zone-region").val();
             if(name.length < 2){
@@ -137,7 +186,9 @@
             if(region.length < 2){
                 alert("enter region please");
             }
+            var html = name + " " + region;
 
+            $("#zoneListBody").append(html);
         });
 
 //
