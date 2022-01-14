@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css"  />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.4/sweetalert2.min.css"  />
   <link rel="stylesheet" href="{{asset('dashboard/plugins/dropzone/min/dropzone.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/fullcalendar/main.css')}}">
 
   <link id="pagestyle" href="{{asset('assets/css/material-dashboard.css')}}?v=3.0.0" rel="stylesheet" />
 </head>
