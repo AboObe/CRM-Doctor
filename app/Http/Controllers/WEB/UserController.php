@@ -189,14 +189,4 @@ class UserController extends Controller
 
         return redirect()->intended('user');
     }
-
-
-
-    public function getAdmin(){
-            return "admin";
-    }
-
-    public function getRepresentative(){
-        return "Representative";
-    }
 }
