@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\WEB;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AppointmentResource;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Interfaces\BasicRepositoryInterface;
@@ -30,7 +31,26 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        return view('appointment.calender');
+        $appointments= $this->basicRepository->getAll($this->model);
+        return $appointments;
+        $result = [];
+        foreach($appointments as $appointment)
+        {
+            $result=[
+                'id' => $appointment->id,
+            'representative_id' => $appointment->representative_id,
+            'doctor_id' => $appointment->doctor_id,
+            'location' => $appointment->location,
+            'notes' => $appointment->notes,
+            'actual_date' => date('Y-m-d H:i:s', $appointment->actual_date),
+            'expected_date' => date('Y-m-d H:i:s',$appointment->expected_date),
+            'status' => $appointment->status,
+            'doctor_name' => $appointment->doctor->name,
+            'doctor_address' => $appointment->doctor->address,
+            ];
+        }
+
+        return view('appointment.calender',compact($result));
     }
 
     /**
