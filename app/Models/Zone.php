@@ -10,7 +10,7 @@ class Zone extends Model
     use HasFactory;
 
     protected $fillable = [
-        'representative_id', 'city', 'region', 'country'
+        'user_id', 'city', 'region', 'country'
     ];
 
      /**

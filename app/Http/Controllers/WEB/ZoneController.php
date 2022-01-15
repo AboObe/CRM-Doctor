@@ -45,18 +45,20 @@ class ZoneController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($request)
     {
         $zoneDetails = $request->only([
             'city',
             'region',
             'country',
-            'representative_id'
+            'user_id'
         ]);
 
-        $zone = $this->basicRepository->create($this->model,$zoneDetails);
+        $this->basicRepository->create($this->model,$zoneDetails);
+
+        /*$zone = $this->basicRepository->create($this->model,$zoneDetails);
         
-        return $zone; 
+        return $zone;*/ 
     }
 
     /**
@@ -94,7 +96,7 @@ class ZoneController extends Controller
             'city',
             'region',
             'country',
-            'representative_id'
+            'user_id'
         ]);
 
         $zone = $this->basicRepository->getById($this->model,$id);
