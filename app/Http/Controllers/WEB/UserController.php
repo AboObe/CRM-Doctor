@@ -4,12 +4,14 @@ namespace App\Http\Controllers\WEB;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Zone;
 use Illuminate\Http\Request;
 use App\Interfaces\BasicRepositoryInterface;
 use DataTables;
 use Validator;
 use App\Http\Traits\ImageUploadTrait;
 use Hash;
+use App\Http\Resources\UserResource;
 
 
 class UserController extends Controller
@@ -17,12 +19,14 @@ class UserController extends Controller
     use ImageUploadTrait;
     private BasicRepositoryInterface $basicRepository;
     private $model;
+    private $zone;
 
     public function __construct(BasicRepositoryInterface $basicRepository)
     {
         $this->middleware(['auth',"isAdmin"]);
         $this->basicRepository = $basicRepository;
         $this->model = new User;
+        $this->zone = new Zone;
     }
     /**
      * Display a listing of the resource.
@@ -109,6 +113,18 @@ class UserController extends Controller
 
         $user = $this->basicRepository->create($this->model,$userDetails);
 
+        $i = 0;
+        foreach($request->z_name as $zone){
+            
+            $input = [
+                "city" => $zone,
+                "region" => $request->z_region[$i],
+                "user_id" => $user->id
+            ];
+            $i++;
+            $this->zone->create($input);
+        }
+
         return redirect()->back();
     }
 
@@ -133,6 +149,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->basicRepository->getById($this->model,$id);
+        $user = new UserResource($user);
         return view('user/create',compact('user'));
     }
 
@@ -149,7 +166,7 @@ class UserController extends Controller
             'name'   => 'required|max:250',
             'gender' => 'required|in:male,female',
             'birthday'   => 'required|date|date_format:Y-m-d',
-            'photo'  => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+         //   'photo'  => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         if ($validateErrors->fails()) {

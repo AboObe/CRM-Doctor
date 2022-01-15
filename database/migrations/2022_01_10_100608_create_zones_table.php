@@ -15,8 +15,8 @@ class CreateZonesTable extends Migration
     {
         Schema::create('zones', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('representative_id')->nullable();
-            $table->foreign('representative_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('city')->nullable();
             $table->string('region')->nullable();
             $table->string('country')->nullable();
