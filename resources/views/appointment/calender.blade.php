@@ -60,7 +60,6 @@
       // initialize the external events
       // -----------------------------------------------------------------
 
-        var appointments =     {{$appointments}};
 
       var calendar = new Calendar(calendarEl, {
         headerToolbar: {
@@ -71,6 +70,33 @@
         themeSystem: 'bootstrap',
         //Random default events
         events: [
+            @php
+             foreach($appointments as $pp)
+                {
+                    @endphp
+                    {
+          title          : '@php echo $pp->location; @endphp',
+          @php
+          if(date("Y-m") == date("Y-m",strtotime($pp->actual_date))){
+            @endphp
+            start          : new Date(y, m, @php echo date("d",strtotime($pp->actual_date)) @endphp, @php echo date("H",strtotime($pp->actual_date)) @endphp, @php echo date("i",strtotime($pp->actual_date)) @endphp),
+            @php
+          }else{
+            @endphp
+            start          : new Date(y, @php echo date("m",strtotime($pp->actual_date)) @endphp, @php echo date("d",strtotime($pp->actual_date)) @endphp, @php echo date("H",strtotime($pp->actual_date)) @endphp, @php echo date("i",strtotime($pp->actual_date)) @endphp),
+            @php
+          }
+          @endphp
+
+          allDay         : false,
+          backgroundColor: '#0073b7', //Blue
+          borderColor    : '#0073b7' //Blue
+        },
+
+                    @php
+
+                }
+            @endphp
 
         ],
         editable  : true,

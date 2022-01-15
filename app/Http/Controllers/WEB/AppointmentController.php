@@ -49,7 +49,7 @@ class AppointmentController extends Controller
         }
 
 
-        return view('appointment.calender', $appointments)->with(['appointments'=>$appointments]);
+        return view('appointment.calender', $appointments)->with(['appointments'=>$appointments,'events'=>$events]);
     }
 
     /**
