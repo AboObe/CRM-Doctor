@@ -19,7 +19,7 @@
  @include('layouts.head')
 	<!-- End Head -->
 
-<body class="g-sidenav-show  bg-gray-200">
+<body class="g-sidenav-show  bg-gray-200 g-sidenav-pinned">
 
   <!-- Left Sidebar -->
 	@include('layouts.sidebar')
