@@ -32,25 +32,24 @@ class AppointmentController extends Controller
     public function index()
     {
         $appointments= $this->basicRepository->getAll($this->model);
-        return $appointments;
+        // return $appointments;
         $result = [];
+        $events= [];
+
         foreach($appointments as $appointment)
         {
-            $result=[
-                'id' => $appointment->id,
-            'representative_id' => $appointment->representative_id,
-            'doctor_id' => $appointment->doctor_id,
-            'location' => $appointment->location,
-            'notes' => $appointment->notes,
-            'actual_date' => date('Y-m-d H:i:s', $appointment->actual_date),
-            'expected_date' => date('Y-m-d H:i:s',$appointment->expected_date),
-            'status' => $appointment->status,
-            'doctor_name' => $appointment->doctor->name,
-            'doctor_address' => $appointment->doctor->address,
+            $events[] = [
+                'title' => $appointment->id,
+            'start' => 'new Date(y, m, d, 12, 0)',
+            'end' => 'new Date(y, m, d, 12, 0)',
+            'backgroundColor' => '#00c0ef',
+            'borderColor' => '#00c0ef',
+
             ];
         }
 
-        return view('appointment.calender',compact($result));
+
+        return view('appointment.calender', $appointments)->with(['appointments'=>$appointments]);
     }
 
     /**
