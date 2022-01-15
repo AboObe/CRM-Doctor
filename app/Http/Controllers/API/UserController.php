@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use App\Http\Resources\UserResource;
 
 
 class UserController extends BaseController
@@ -103,7 +104,9 @@ class UserController extends BaseController
     */
     public function show($id)
     {
-		return "no action2";
+		$user = $this->basicRepository->getById($this->model,$id);
+        return $this->sendResponse(new UserResource($user) , 'Return User successfully.');
+
     }
     /**
      * Show the form for editing the specified resource.
