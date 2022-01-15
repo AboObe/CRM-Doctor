@@ -5,6 +5,7 @@ use App\Http\Controllers\WEB\DoctorController;
 use App\Http\Controllers\WEB\HomeController;
 use App\Http\Controllers\WEB\AppointmentController;
 use App\Http\Controllers\WEB\UserController;
+use App\Http\Controllers\WEB\MediaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,3 +34,4 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/Admin', [UserController::class, 'getAdmin'])->name('admin');
         Route::get('/Representative', [UserController::class, 'getRepresentative'])->name('representative');
 });
+Route::post('upload/file/{folder}', [MediaController::class, 'upload_file'])->name("image.upload");
