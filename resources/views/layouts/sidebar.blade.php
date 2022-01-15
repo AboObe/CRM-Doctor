@@ -17,7 +17,7 @@
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-        
+
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">CRM</h6>
         </li>
@@ -57,7 +57,7 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
-            
+
             <span class="nav-link-text ms-1">Sign Out</span>
           </a>
 

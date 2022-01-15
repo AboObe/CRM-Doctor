@@ -115,7 +115,7 @@ class UserController extends Controller
 
         $i = 0;
         foreach($request->z_name as $zone){
-            
+
             $input = [
                 "city" => $zone,
                 "region" => $request->z_region[$i],
@@ -150,6 +150,7 @@ class UserController extends Controller
     {
         $user = $this->basicRepository->getById($this->model,$id);
         $user = new UserResource($user);
+
         return view('user/create',compact('user'));
     }
 
