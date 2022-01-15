@@ -91,8 +91,24 @@
                         <th>Remove</th>
 
                     </tr>
-                    <tbody id="zoneListBody">
 
+                    <tbody id="zoneListBody">
+                        @if(count($user->zones) > 0)
+                        @foreach ($user->zones as $zone)
+                            <tr>
+                                <td>
+                                    {{$loop->index +1}}
+                                </td>
+                                <td>
+                                    <input type="text" name="name[]" value="{{$zone->city}}" >
+                                </td>
+                                <td>
+                                    <input type="text" name="region[]" value="{{$zone->region}}" >
+                                </td>
+                                <td> <a class='removeInput' onclick='removeZone(this)' > <i class='fa fa-trash'></i>  </a> </td>
+                            </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
