@@ -163,6 +163,7 @@ class UserController extends Controller
      */
     public function update(Request $request,$id)
     {
+        
         $validateErrors = Validator::make($request->all(), [
             'name'   => 'required|max:250',
             'gender' => 'required|in:male,female',

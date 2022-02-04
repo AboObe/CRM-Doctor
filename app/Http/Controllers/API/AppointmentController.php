@@ -110,7 +110,7 @@ class AppointmentController extends BaseController
         
         $validator = Validator::make($input, [
             'doctor_id'   => 'required',
-            'expected_date'   => 'required|date',
+            'expected_date'   => 'date',
             'actual_date' => 'date'
         ]);
 

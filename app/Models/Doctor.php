@@ -14,12 +14,16 @@ class Doctor extends Model
         'email', 'city', 'region', 'country', 'postal_code', 'assign_to'
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:m',
+    ];
+
      /**
      * Get the Representative this meeting the doctor.
      */
     public function representative()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'assign_to');
     }
 
 

@@ -26,7 +26,6 @@ class ReportController extends BaseController
         $appointments = Appointment::where('representative_id',$representative_id)
                                     ->where('expected_date','>',$current_time)->get();
 
-
         $appointmentsCollection =  collect();
         foreach($appointments as $appointment)
         {

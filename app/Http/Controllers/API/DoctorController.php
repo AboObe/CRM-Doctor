@@ -9,6 +9,7 @@ use App\Interfaces\BasicRepositoryInterface;
 use App\Models\Doctor;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\DoctorResource;
 
 
 class DoctorController extends BaseController
@@ -34,7 +35,6 @@ class DoctorController extends BaseController
         $doctors = Doctor::where('assign_to',$representative_id)
                             ->where('status_doctor','active')
                             ->get();
-
         return $this->sendResponse($doctors , 'Return Doctors successfully.'); 
     }
 
